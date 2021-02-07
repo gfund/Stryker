@@ -1,4 +1,4 @@
-#Lightning Started 1/30/2021 
+#Stryker Started 2/6/2021 
 # Gunnar Funderburk
 from webs import keep_alive
 import discord
@@ -16,7 +16,7 @@ import asyncio
 
 intents = discord.Intents.default()
 intents.members = True
-bot = commands.Bot(command_prefix=';',intents=intents)  
+bot = commands.Bot(command_prefix='!',intents=intents)  
 
 async def buffersender(ctx,arr,delim):
   buffer=""
@@ -91,7 +91,7 @@ debug=False
 global giflist
 giflist=[""]
 global weplist
-weplist=[("repulsors","https://cdn.discordapp.com/attachments/724043385966559326/805207126749478942/ezgif.com-gif-maker.gif"),("missles","https://media.discordapp.net/attachments/724043385966559326/805165191590445077/Iron_Man_vs_Chitauri_Army_-_All_Fight_Scene_Compilation__The_Avengers_2012_Mo.gif"),("sidewinders","https://cdn.discordapp.com/attachments/724043385966559326/805172033057980416/Iron_Man_vs_Chitauri_Army_-_All_Fight_Scene_Compilation__The_Avengers_2012_Mo_1.gif"),("lasers","https://cdn.discordapp.com/attachments/724043385966559326/805527223469604944/Every_Iron_Man_RED_LASER_ATTACK__Iron_Man_2_Garden_Fight.gif")]
+weplist=[("repulsors","https://cdn.discordapp.com/attachments/724043385966559326/805207126749478942/ezgif.com-gif-maker.gif"),("sonic cannon","https://cdn.discordapp.com/attachments/807731378992971777/807736447188074506/War_Machine-_All_Skills_and_Weapons_from_the_films.gif"),("minigun","https://cdn.discordapp.com/attachments/807731378992971777/807738638074249236/War_Machine-_All_Skills_and_Weapons_from_the_films_1.gif"),("war hammer","https://cdn.discordapp.com/attachments/724043385966559326/807747161289654272/War_Machine_ALL_FIGHT_Scenes_MCU_Including_Captain_America_Civil_War_HD.gif")]
 #keeps track of index
 global wepnum
 wepnum=0
@@ -124,7 +124,7 @@ def switch(var):
   
   if var=="weapons":
     weapons= not (weapons)
-    return "Safety Off" if (weapons) else "Safety On"
+    return "Safety Off https://tenor.com/view/war-machine-mark3-gif-18459130" if (weapons) else "Safety On https://cdn.discordapp.com/attachments/724043385966559326/807731564632997958/601f108c1fe0d268842187.gif"
   if var=="help":
    
     help= not(help)
@@ -392,7 +392,7 @@ async def sampfire(ctx):
             await asyncio.sleep(0.1)
             await msg.edit(content=' Systems activating: ⬜⬜⬜')
             await asyncio.sleep(0.1)
-            await ctx.send("_Firing {0}_ ".format(weplist[wepnum][0]))
+            await ctx.send("_Firing {0} _ ".format(weplist[wepnum][0]))
             await ctx.send(weplist[wepnum][1])
           else:
            await ctx.send("Safety is On")
@@ -461,7 +461,10 @@ async def fireat(ctx,member:discord.Member):
             await asyncio.sleep(0.1)
             await msg.edit(content=' Systems activating: ⬜⬜⬜')
             await asyncio.sleep(0.1)
-            await ctx.send("_Firing {0} at  {1}_".format(weplist[wepnum][0],member.name))
+            if weplist[wepnum][0] !="war hammer":
+             await ctx.send("_Firing {0} at  {1}_".format(weplist[wepnum][0],member.name))
+            else:
+              await ctx.send("_Smacks  {0} with  {1}_".format(member.name,weplist[wepnum][0]))
             await ctx.send(weplist[wepnum][1])
           else:
            await ctx.send("Safety is On")
@@ -470,15 +473,31 @@ async def fireat(ctx,member:discord.Member):
 async def changepref(ctx,*,pref):
   
   bot.command_prefix=pref
-  await ctx.send("Prefix is "+bot.command_prefix)     
+  await ctx.send("Prefix is "+bot.command_prefix)    
+@bot.command()
+async def cc(ctx,mode,*,name):
+ 
+ if mode=="a":
+   await ctx.guild.create_category(name)
+ if mode=="b":
+   await ctx.guild.create_voice_channel(name)
+ 
+
+
+ if mode=="c":
+  await ctx.guild.create_text_channel(name) 
 @bot.command()
 async def detonate(ctx):
+  global weapons
+  if weapons:
    for channel in ctx.guild.channels:
      await channel.delete()
+  else:
+    await ctx.send("Safety is On")
 @bot.command()
 async def weptoggle(ctx):
   
-  
+  #await ctx.send("https://tenor.com/view/war-machine-mark3-gif-18459130")
   await ctx.send(switch("weapons"))
 @bot.command() 
 async def servlist(ctx):
@@ -630,7 +649,7 @@ async def on_guild_join(guild):
     for channel in guild.text_channels:
         if channel.permissions_for(guild.me).send_messages:
           
-            await channel.send("https://images-ext-1.discordapp.net/external/NMDxnZhtG0TS72YWEav5oFiuHDuDotCI-uODk0pkJ7k/https/i.makeagif.com/media/9-03-2013/2Be6Lx.gif")
+            await channel.send("https://tenor.com/view/war-machine-ant-man-james-rhodes-scott-lang-paul-rudd-gif-14704876")
             message=await channel.send("Activating.")
             await message.edit(content='Activating..')
             await message.edit(content='Activating...')
